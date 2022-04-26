@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="netflixLogin">
+    <div class="resetPassword">
         <div class="form form--login">
             <form action="" method="post">
                 <h2 form__title>reset password</h2>
