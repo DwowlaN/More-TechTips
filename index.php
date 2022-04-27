@@ -10,7 +10,7 @@
 <body>
    <div>
        <nav>
-           <a href="">Login</a>
+           <a href="">Log me in</a>
            <a href="">Sign Up</a>
        </nav>
        <img src="https://memegenerator.net/img/instances/52441577.jpg" alt="">
