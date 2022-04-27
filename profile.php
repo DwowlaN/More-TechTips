@@ -12,6 +12,7 @@
 <body>
 <body>
     <div>
+        <p><i>image here</i></p>
         <p>This is your profile page</p>
     </div>
 </body>
