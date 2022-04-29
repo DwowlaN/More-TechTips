@@ -1,5 +1,16 @@
 <?php 
-
+    session_start();
+     // If the user is not logged in redirect to the login page...
+    if (!isset($_SESSION['loggedin'])) {
+         header('Location: index.php');
+         exit;
+    }
+    //connect to MySQL db
+    $mysql_hostname = "localhost";
+    $mysql_user = "username";
+    $mysql_password = "password";
+    $mysql_database = "moretechtips";
+    $con = mysqli_connect($mysql_hostname, $mysql_user, $mysql_password, $mysql_database);
 
 ?>
 <head>
