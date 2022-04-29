@@ -12,7 +12,9 @@
 <body>
 <body>
     <div>
-        <p><i>image here</i></p>
+        <img src="https://memegenerator.net/img/instances/52441577.jpg" alt="profile pic here">
         <p>This is your profile page</p>
+
+        <p>this is a user description (how tf I am gonna do the php stuff is still to figure out)</p>
     </div>
 </body>
