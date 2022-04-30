@@ -12,17 +12,34 @@ if (isset($_POST["resetSubmit"])) {
 
     $userEmail = $_POST["email"];
 
-    $sql = "DELETE FROM pwreset WHERE pwRmail=?";
+    $sqlD = "DELETE FROM pwreset WHERE pwRmail=?";
     $stmnt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmnt,$sql)){
-        echo "there was an error";
+    if(!mysqli_stmt_prepare($stmnt,$sqlD)){
+        echo "There was an error";
         exit();
     }
     else{
 
-        mysqli_stmt_bind_param($stmt, "s", $userEmail);
-        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_param($stmnt, "s", $userEmail);
+        mysqli_stmt_execute($stmnt);
     }
+
+    $sqlI = "INSERT INTO pwreset (pwRmail, pwRselector, pwRtoken, pwRexpire ) VALUES (?,?,?,?);";
+    $stmnt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmnt,$sqlD)){
+        echo "There was an error";
+        exit();
+    }
+    else{
+        $hasedToken = password_hash($token, PASSWORD_DEFAULT);
+
+        mysqli_stmt_bind_param($stmnt, "ssss", $userEmail, $selector, $hasedToken, $expires);
+        mysqli_stmt_execute($stmnt);
+    }
+    mysqli_stmt_close($stmnt);
+    //mysqli_close();
+
+
 
 } 
 
