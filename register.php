@@ -10,10 +10,23 @@
     }
 }*/
 
+include_once(__DIR__."/classes/User.php");
 
 if (!empty($_POST)) {
+    try{
+        $user = new User();
+        $user->setEmail($_POST["email"]);
+        $user->setPassword($_POST["password"]);
+        $user->setUsername($_POST["username"]);
+
+        $user->register();
+        header("location: register.php");
+    }catch(\Throwable $e){
+        $error = $e->getMessage();
+    }
+
     // er is iéts gepost!
-    $username = $_POST['username'];
+    /* $username = $_POST['username'];
     $email = $_POST['email'];
     $options = [
         'cost' => 13,
@@ -31,13 +44,8 @@ if (!empty($_POST)) {
     }else{
         echo"nope";
     }
-    header("login.php");
+    header("login.php"); */
     
-    /*$emailcheck = "@g.com";
-    $email1 = $user['email'];
-    if(strpos($email1, $emailcheck) !== false){
-        echo"yurrr";
-    }*/
     
    
 
@@ -79,14 +87,7 @@ if (!empty($_POST)) {
     <div class="loginDiv">
         <div class="form form--login">
             <form action="" method="post">
-                <h2 form__title>Sign In</h2>
-                <?php if (isset($error)) : ?>
-                    <div class="form__error">
-                        <p>
-                            please fill in the correct email and password.
-                        </p>
-                    </div>
-                <?php endif; ?>
+                <h2 form__title>Register</h2>
                 <div class="form__field">
                     <label for="psername">Username</label>
                     <input type="username" name="username">
@@ -103,6 +104,9 @@ if (!empty($_POST)) {
                     <input type="submit" value="Sign in" class="btn btn--primary">
                 </div>
             </form>
+            <?php if(isset($error)): ?>
+        <div class="error"><?php echo $error; ?></div>
+        <?php endif; ?>
         </div>
     </div>
 </body>

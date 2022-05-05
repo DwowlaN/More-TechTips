@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 class User{
     public function __construct(){
 
@@ -43,6 +46,9 @@ return $this->password;
  */ 
 public function setPassword($password)
 {
+    if(strlen($password) < 6){
+        throw new Exception("Passwords must be longer than 6 characters.");
+    }
 $this->password = $password;
 
 return $this;
@@ -87,4 +93,33 @@ $this->username = $username;
 
 return $this;
 }
+
+public function register(){
+    $options = [
+        'cost' => 13,
+    ];
+    $password = password_hash($this->getPassword(), PASSWORD_DEFAULT, $options);
+    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $query = $conn->prepare("insert into users (username, email, password) values (:username, :email, :password)");
+    $query->bindValue(":username", $this->getUsername());
+    $query->bindValue(":email", $this->getEmail());
+    $query->bindValue(":password", $password);
+    $email=$this->getEmail();
+    $emailcheck = ".be";
+    if(strpos($email, $emailcheck) !== false){
+        $result= $query->execute();
+    }else{
+        throw new Exception("must end on .be");
+    }
+    
+    return $result;
+
+}
+    /*public function emailCheck(){
+        $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+        $query = $conn->prepare("select * from users where email = '".$_POST['email']."'");
+        $result = $query->execute();
+        $emailcheck = $result->fetch_assoc();
+        return(is_array($emailcheck)&&count($emailcheck>0));
+    }*/
 }
