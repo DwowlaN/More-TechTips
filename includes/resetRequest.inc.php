@@ -37,10 +37,20 @@ if (isset($_POST["resetSubmit"])) {
         mysqli_stmt_execute($stmnt);
     }
     mysqli_stmt_close($stmnt);
-    //mysqli_close();
+    mysqli_close($conn);
 
+    $to= $userEmail;
+    $subject = "Resetting password for More-TechTips";
+    $message = '<p>We recieved a password reset request. The link to reset your password is below.
+    If you did not request this email, you can ignore it.</p>
+    <p>This is the link to reset your password: </br>
+    <a href="' . $url . '">' . $url . '</a></p>';
+    $headers = "From: More-TechTips <RealMoreTechTips@gmail.com>\r\n";
+    $headers = "Reply-To: RealMoreTechTips@gmail.com\r\n";
+    $headers = "Content-type : text/hmtl\r\n";
 
-
+    mail($to, $subject, $message, $headers);
+    header("location: ../resetPWmail.php?reset=success");
 } 
 
 
