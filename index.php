@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="CSS/Index.css">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +11,8 @@
 <body>
    <div>
        <nav>
-           <a href="">Log me in</a>
+           <a class= "home" href="">Home</a>
+           <a class="login" href="">Log me in</a>
            <a href="">Sign Up</a>
        </nav>
        <img src="https://memegenerator.net/img/instances/52441577.jpg" alt="">
