@@ -24,6 +24,9 @@ return $this->email;
  */ 
 public function setEmail($email)
 {
+    if(empty($email)){
+        throw new Exception("e-mail can't be empty");
+    }
 $this->email = $email;
 
 return $this;
@@ -87,6 +90,9 @@ return $this->username;
  */ 
 public function setUsername($username)
 {
+    if(empty($username)){
+        throw new Exception("username can't be empty");
+    }
 $this->username = $username;
 
 return $this;
@@ -102,18 +108,34 @@ public function register(){
     $query->bindValue(":username", $this->getUsername());
     $query->bindValue(":email", $this->getEmail());
     $query->bindValue(":password", $password);
-    $email=$this->getEmail();
+    $email = $this->getEmail();
     $emailcheck = "@student.thomasmore.be";
     $emailcheck2 = "@thomasmore.be";
     if(strpos($email, $emailcheck) !== false || strpos($email, $emailcheck2) !== false){
         $result= $query->execute();
     }else{
-        throw new Exception("must end on @student.thomasmore.be or @thomasmore.be");
+        throw new Exception("e-mail must end on @student.thomasmore.be or @thomasmore.be");
     }
     
     return $result;
 
 }
+/*public function dbEmail(){
+    $email = $_POST['email'];
+    //prepare the statement
+    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email=?");
+    //execute the statement
+    $stmt->execute();
+    //fetch result
+    if ($email === $this->getEmail()) {
+        throw new Exception("e-mail can't be the same");
+        // email exists
+    } else {
+        // email does not exist
+    } 
+}*/
+
     /*public function emailCheck(){
         $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
         $query = $conn->prepare("select * from users where email = '".$_POST['email']."'");
