@@ -1,7 +1,5 @@
 <?php
 
-use LDAP\Result;
-
 class User{
     public function __construct(){
 
@@ -105,11 +103,12 @@ public function register(){
     $query->bindValue(":email", $this->getEmail());
     $query->bindValue(":password", $password);
     $email=$this->getEmail();
-    $emailcheck = ".be";
-    if(strpos($email, $emailcheck) !== false){
+    $emailcheck = "@student.thomasmore.be";
+    $emailcheck2 = "@thomasmore.be";
+    if(strpos($email, $emailcheck) !== false || strpos($email, $emailcheck2) !== false){
         $result= $query->execute();
     }else{
-        throw new Exception("must end on .be");
+        throw new Exception("must end on @student.thomasmore.be or @thomasmore.be");
     }
     
     return $result;
