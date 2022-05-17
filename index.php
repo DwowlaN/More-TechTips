@@ -11,6 +11,9 @@
 <body>
    <div>
        <nav>
+           <div class="flex-search">
+            <p class="search">Search</p>
+           </div>
            <a class= "home" href="">Home</a>
            <a class="login" href="">Log me in</a>
            <a href="">Sign Up</a>
