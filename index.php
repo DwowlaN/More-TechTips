@@ -11,9 +11,12 @@
 <body>
    <div>
        <nav>
+           <p class="search">search</p>
            <a class= "home" href="">Home</a>
            <a class="login" href="">Log me in</a>
            <a href="">Sign Up</a>
+           <a class= "reset" href="resetPW.mail.php">Reset Password</a>Home</a>
+
        </nav>
        <img src="https://memegenerator.net/img/instances/52441577.jpg" alt="">
    </div>
