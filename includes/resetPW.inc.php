@@ -28,7 +28,7 @@ if(!mysqli_stmt_prepare($stmnt,$sql)){
 }
 else{
 
-    mysqli_stmt_bind_param($stmnt, "s", $selector, $currentDate);
+    mysqli_stmt_bind_param($stmnt, "ss", $selector, $currentDate);
     mysqli_stmt_execute($stmnt);
 
     $result = mysqli_stmt_get_result($stmnt);
@@ -55,7 +55,35 @@ else{
         else{
             mysqli_stmt_bind_param($stmnt, "s", $tokenEmail);
             mysqli_stmt_execute($stmnt);
-        }
+            $result = mysqli_stmt_get_result($stmnt);
+            if (!$row = mysqli_fetch_assoc($result)){
+            echo "error";
+            exit();
+            } else{
+                $sql = "UPDATE user SET password=? WHERE email=?";
+                $stmnt = mysqli_stmt_init($conn);
+                if(!mysqli_stmt_prepare($stmnt,$sql)){
+                echo "There was an error";
+                exit();
+                }
+            else{
+                $newPwHash = password_hash($password, PASSWORD_DEFAULT);
+             mysqli_stmt_bind_param($stmnt, "ss", $newPwHash, $tokenEmail);
+             mysqli_stmt_execute($stmnt);
+
+             $sql = "DELETE FROM pwreset WHERE pwRmail=?";
+             $stmnt = mysqli_stmt_init($conn);
+             if(!mysqli_stmt_prepare($stmnt,$sql)){
+                 echo "There was an error";
+                 exit();
+             } else{
+                 mysqli_stmt_bind_param($stmnt, "s", $tokenEmail);
+                 mysqli_stmt_execute($stmnt);
+                 header("location:../index.php?newpwd=passwordupdate");
+             }
+            }
+                }   
+                }
 
         }
     }
