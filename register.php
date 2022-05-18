@@ -20,58 +20,12 @@ if (!empty($_POST)) {
         $user->setUsername($_POST["username"]);
 
         $user->register();
-        header("location: register.php");
+        header("location: index.php");
     }catch(\Throwable $e){
         $error = $e->getMessage();
     }
 
-    // er is iéts gepost!
-    /* $username = $_POST['username'];
-    $email = $_POST['email'];
-    $options = [
-        'cost' => 13,
-    ];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
-    $query = $conn->prepare("insert into users (username, email, password) values (:username, :email, :password)");
-    $query->bindValue(":username", $username);
-    $query->bindValue(":email", $email);
-    $query->bindValue(":password", $password);
-    $query->execute();
-    $emailcheck = "@g.com";
-    if(strpos($email, $emailcheck) !== false){
-        echo"gotti";
-    }else{
-        echo"nope";
-    }
-    header("login.php"); */
-    
-    
-   
-
-    /*$conn = new PDO('mysql:host=localhost;dbname=studentcard', "root", "root");
-    $statement = $conn->
-    prepare("insert into student (firstname, lastname) values (:firstname, :lastname)");
-    $statement->bindValue("firstname", $this->firstname);
-    $statement->bindValue("lastname", $this->lastname);
-    return $statement->execute();*/
-
-    // checken of user mag aanloggen
-    /*if (canLogin($username, $email, $password)) {
-        session_start();
-        $_SESSION['email'] = $email; // Op de server !!!
-
-        // doorsturen naar index.php
-        header("Location: index.php");
-    } catch(\Throwable $th){
-        $error = $th->getMessage();
-    }*/
 }
-/*if (str_ends_with($email,'@thomasmore.be')){
-    echo "good email";
-}else{
-    echo "bad email";
-}*/
 
 ?>
 <!DOCTYPE html>
