@@ -67,7 +67,7 @@ class Upload{
         session_start();
         $id = $_SESSION['id'];
         $targetDir = (__DIR__ . "./../uploads/");
-        $fileName = $id . "_" . basename($image['name']);
+        $fileName = $id . basename($image['name']);
         $targetPath = $targetDir . $fileName;
         
         if(move_uploaded_file($image["tmp_name"], $targetPath)){
@@ -76,7 +76,8 @@ class Upload{
             $query->bindValue(":image", $fileName);
             $query->bindValue(":id", $id);
             $query->bindValue(":description", $desc);
-            $result =  $query -> execute();
+            $result =  $query->execute();
+            //var_dump($result);
 
             if($result){
                 return $result;
