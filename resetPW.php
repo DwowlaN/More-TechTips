@@ -8,31 +8,42 @@
 </head>
 
 <body>
-    <div class="resetPassword">
-        <div class="form form--login">
-            <form action="" method="post">
-                <h2 form__title>reset password</h2>
-                <div class="form__error">
-                    <p>
-                        You can reset your password here. If you leave this page, you'll have to request a new password reset.
-                    </p>
-                </div>
-                <div class="form__field">
-                    <label for="Password">new password</label>
-                    <input type="password" name="password">
-                </div>
-                <div class="form__field">
-                    <label for="Password">confirm password</label>
-                    <input type="password" name="password">
-                </div>
+<main>
+        <div class="main-wrapper">
+            <section class="default-section">
+            <?php
+                $selector = $_GET["selector"];
+                $validator = $_GET["validator"];
 
-                <div class="form__field">
-                    <input type="submit" value="Reset" class="btn btn--primary">
+                if (empty($selector)|| empty($validator)){
+                    echo "Could not validate";
+                }
+                else{
+                    if(ctype_xdigit($selector) !== false && ctype_digit($validator) !==false){
+            ?>
+                    <form action="includes/resetPW.inc.php">
+                    <input type="hidden" name="selector" value = "<?php echo $selector; ?>">
+                    <input type="hidden" name="validator" value = "<?php echo $validator; ?>">
+                    <input type="password" name="password" placeholder="new password">
+                    <input type="password" name="passwordRepeat" placeholder="repeat new password">
+                    <button type="submit" name="reset-password-submit">Reset password</button>
+                    </form>
 
-                </div>
-            </form>
+
+                    <?php
+                    if (isset($GET["newpwd"])){
+                        if($GET["newpwd"] == "passwordupdate"){
+                            echo '<p class="signupsucces">yoer password has been reset!</p>';
+                        }
+
+                    }
+                    }
+                }
+
+                ?>
+            </section>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>

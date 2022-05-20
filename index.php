@@ -26,9 +26,11 @@ include_once(__DIR__."/classes/User.php");
 <body>
    <div>
        <nav>
-           <a class= "http://localhost/php/more-techtips/index.php" href="">Home</a>
+            <p class="search">search</p>           
+            <a class= "http://localhost/php/more-techtips/index.php" href="">Home</a>
            <a href="http://localhost/php/more-techtips/profile.php">My profile</a>
            <a href="http://localhost/php/more-techtips/upload.php">Upload</a>
+           <a class= "reset" href="resetPW.mail.php">Reset Password</a>Home</a>
        </nav>
        <div>
            <div>
