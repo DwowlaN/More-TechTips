@@ -8,9 +8,12 @@ if (!empty($_POST)) {
         $user->setUsername($_POST["username"]);
         $user->setPassword($_POST["password"]);
     try{
+        $id = $user->getSessionId($_POST["username"]);
         if($user->canLogin()){
+
             session_start();
             $_SESSION['username'] = $_POST['username'];
+            $_SESSION['id'] = $id;
             header("location:index.php");
         }
     }catch(\Throwable $e){
@@ -42,7 +45,7 @@ if (!empty($_POST)) {
                     </div>
                 <?php endif; ?>
                 <div class="form__field">
-                    <label for="psername">Username</label>
+                    <label for="username">Username</label>
                     <input type="username" name="username">
                 </div>
                 <div class="form__field">
@@ -50,10 +53,16 @@ if (!empty($_POST)) {
                     <input type="password" name="password">
                 </div>
                 <div class="form__field">
-                    <input type="submit" value="Sign in" class="btn btn--primary">
+                    <input type="submit" value="Log in" class="btn btn--primary">
                 </div>
             </form>
         </div>
+    </div>
+    <div>
+        <p>new here?</p>
+        <a href="http://localhost/php/more-techtips/register.php">
+      <input type="submit" value="Create new account"/>
+    </a>
     </div>
 </body>
 

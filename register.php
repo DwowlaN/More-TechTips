@@ -1,25 +1,19 @@
 <?php
 
-
-/*function canLogin($username, $email, $password)
-{
-    if ($username === "test" && $email === "test@test" && $password === "12345") {
-        return true;
-    } else {
-        return false;
-    }
-}*/
-
 include_once(__DIR__."/classes/User.php");
 
 if (!empty($_POST)) {
     try{
+        session_start();
         $user = new User();
         $user->setEmail($_POST["email"]);
-        $user->setPassword($_POST["password"]);
         $user->setUsername($_POST["username"]);
+        $user->setPassword($_POST["password"]);
 
         $user->register();
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['id'] = $user->getSessionId($_SESSION['username']);
+        var_dump($_SESSION['id']);
         header("location: index.php");
     }catch(\Throwable $e){
         $error = $e->getMessage();
@@ -62,6 +56,12 @@ if (!empty($_POST)) {
         <div class="error"><?php echo $error; ?></div>
         <?php endif; ?>
         </div>
+    </div>
+    <div>
+        <p>Already have an account?</p>
+        <a href="http://localhost/php/more-techtips/login.php">
+      <input type="submit" value="log in"/>
+    </a>
     </div>
 </body>
 
