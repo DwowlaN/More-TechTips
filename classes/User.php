@@ -1,4 +1,9 @@
 <?php
+//nieuwe klasse getters en setters deftig implementeren, mis het nut van in getters/setters zo de extra beveiliging toe te voegen (bij bio bv)
+//ajax volledig van niks opbouwen en toepassen
+// in bio bijvoorbeeld XSS verdegiging doen
+
+include_once(__DIR__ . "/Db.php");
 
 class User{
     public function __construct(){
@@ -163,7 +168,7 @@ return $this;
     }
     public function getSessionId($username)
     {   session_start();
-        $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+        $conn = Db::getConnection();
         $query = $conn->prepare("select id from users where (username) = (:username)");
         $query->bindValue(":username", $username);
         $query->execute();
@@ -185,7 +190,7 @@ public function register(){
     if($emailResult){
         throw new Exception("e-mail already has an account");
     }
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $conn = Db::getConnection();
     $query = $conn->prepare("insert into users (username, email, password) values (:username, :email, :password)");
     $query->bindValue(":username", $this->getUsername());
     $query->bindValue(":email", $this->getEmail());
@@ -199,7 +204,7 @@ public function register(){
 }
 
 public function checkEmail($email){
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $conn = Db::getConnection();
     $query = $conn->prepare("select email from users where (email) = (:email)");
     $query->bindValue(":email", $email);
     $query->execute();
@@ -210,7 +215,7 @@ public function checkEmail($email){
 
 public function canLogin(){
 
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $conn = Db::getConnection();
     $query = $conn->prepare("select * from users where (username) = (:username)");
     //sessionstart doen, checken of ik cookie kan zien?, session id/username
     $username = $this->getUsername();
@@ -234,7 +239,7 @@ public function canLogin(){
 
 public function getAll()
 {
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $conn = Db::getConnection();
     $query = $conn->prepare("select * from users");
     $query->execute();
     $result = $query->fetch();
@@ -244,7 +249,7 @@ public function getAll()
 
 public function addBio(){   
     session_start();
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $conn = Db::getConnection();
     $query = $conn->prepare("update users set bio = (:bio) WHERE (id) = (:id)");
     $query->bindValue(":bio", $this->getBio());
     $query->bindValue(":id", $_SESSION['id']);
@@ -258,7 +263,7 @@ public function addBio(){
 }
 /*public function printBio(){
     session_start();
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $conn = Db::getConnection();
     $query = $conn->prepare("select bio from users WHERE (id) = (:id)");
     $query->bindValue(":id", $_SESSION['id']);
     $query->execute();
@@ -268,7 +273,7 @@ public function addBio(){
 }*/
 public function extraEmail(){
     session_start();
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $conn = Db::getConnection();
     $query = $conn->prepare("update users set extraEmail = (:extraEmail) WHERE (id) = (:id)");
     $query->bindValue(":extraEmail", $this->getExtraEmail());
     $query->bindValue(":id", $_SESSION['id']);
@@ -282,7 +287,7 @@ public function extraEmail(){
 }
 /*public function deleteUser(){
     session_start();
-    $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+    $conn = Db::getConnection();
     $query = $conn->prepare("delete from users where id = (:id)");
     //query zelfde maar dan posts, comments etc, met user_id query1,2 etc
     $query->bindValue(":id", $_SESSION['id']);

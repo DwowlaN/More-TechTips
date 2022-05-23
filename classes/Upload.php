@@ -1,5 +1,5 @@
 <?php
-
+include_once(__DIR__ . "/Db.php");
 class Upload{
     private $image;
     private $desc;
@@ -71,7 +71,7 @@ class Upload{
         $targetPath = $targetDir . $fileName;
         
         if(move_uploaded_file($image["tmp_name"], $targetPath)){
-            $conn = new PDO('mysql:host=localhost;dbname=moretechtips_db', "root", "root");
+            $conn = Db::getConnection();
             $query = $conn->prepare("insert into posts (imagePath, uploadDate, description, user_id) values (:image, now(), :description, :id)");
             $query->bindValue(":image", $fileName);
             $query->bindValue(":id", $id);
