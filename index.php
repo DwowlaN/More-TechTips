@@ -40,11 +40,14 @@ include_once(__DIR__."/classes/Comment.php");
    <div>
        <nav>
             <a href="index.php">Home</a>
-            <p class="search">search</p>
+            <div class="flex-search">
+                <p class="search">search</p>
+            </div>
             <a href="upload.php">Upload</a>
-            <a href="profile.php">My profile</a>
-            <a class= "reset" href="resetPW.mail.php">Reset Password</a>
-            <a href="logout.php">Log out</a>
+            <div class="user">
+                <a href="profile.php" class="profile">My profile</a>
+                <a href="logout.php" class="logout">Log out</a>
+            </div>
        </nav>
        <div>
            <div>
