@@ -4,22 +4,23 @@ include_once(__DIR__ . "/classes/Upload.php");
 
 session_start();
 if(isset($_SESSION['id'])){
+    try {
+        if(!empty($_POST)){
+        $upload = new Upload();
+        $upload->projectImgCheck($_FILES["uploadImage"]);
+        $upload->projectImgUpload($_FILES["uploadImage"], $_POST["description"]);
+        $upload->setImage($image);
+        $upload->setDesc($desc);
+        //var_dump($_POST["description"]);
+    }
+    }catch(\Throwable $e){
+        $error = $e->getMessage();
+    }
 } else {
     header ("location:login.php");
 }
 
-try {
-    if(!empty($_POST)){
-    $upload = new Upload();
-    $upload->projectImgCheck($_FILES["uploadImage"]);
-    $upload->projectImgUpload($_FILES["uploadImage"], $_POST["description"]);
-    $upload->setImage($image);
-    $upload->setDesc($desc);
-    //var_dump($upload);
-}
-}catch(\Throwable $e){
-    $error = $e->getMessage();
-}
+
 ?>
 
 

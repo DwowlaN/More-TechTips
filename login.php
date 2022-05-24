@@ -37,13 +37,9 @@ if (!empty($_POST)) {
         <div class="form form--login">
             <form action="" method="post">
                 <h2 form__title>Log In</h2>
-                <?php if (isset($error)) : ?>
-                    <div class="form__error">
-                        <p>
-                            please fill in the correct username and password.
-                        </p>
-                    </div>
-                <?php endif; ?>
+                <?php if(isset($error)): ?>
+                        <div class="error"><?php echo $error; ?></div>
+                    <?php endif; ?>
                 <div class="form__field">
                     <label for="username">Username</label>
                     <input type="username" name="username">

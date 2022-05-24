@@ -1,9 +1,12 @@
 <?php
 
 include_once(__DIR__."/classes/User.php");
+include_once(__DIR__."/classes/Post.php");
 
 session_start();
 if(isset($_SESSION['id'])){
+    $allPosts = Post::getUserPosts($_SESSION['id']);
+
 } else {
     header ("location:login.php");
 }
@@ -15,12 +18,8 @@ try {
     $user->addBio();
     $user->setExtraEmail($_POST["extraEmail"]);
     $user->extraEmail();
-    //$user->printBio();
     $bioPrint= $user->getBio();
     $extraEmailPrint = $user->getExtraEmail();
-    
-    //$user->deleteUser($_POST["id"]);
-    //$user->deleteUser();
     
 }
 }catch(\Throwable $e){
@@ -39,6 +38,10 @@ try {
 </head>
 <body>
 <body>
+<a href="http://localhost/php/more-techtips/index.php">Home</a>
+<a href="http://localhost/php/more-techtips/upload.php">Upload</a>
+<a href="http://localhost/php/more-techtips/logout.php">Log out</a>
+
     <div>
         <img src="https://memegenerator.net/img/instances/52441577.jpg" alt="profile pic here">
         <p>This is your profile page</p>
@@ -46,23 +49,34 @@ try {
         <form action="" method="post">
             <div class="form__field">
                     <label for="bio">Bio</label>
-                    <input type="bio" name="bio" value="<? echo $bioPrint; ?>">
+                    <input type="bio" name="bio" value="<? echo htmlspecialchars($bioPrint); ?>">
             </div>
         
             <div class="form__field">
                     <label for="extraEmail">Add a secondary email</label>
-                    <input type="extraEmail" name="extraEmail" value="<? echo $extraEmailPrint; ?>">
+                    <input type="extraEmail" name="extraEmail" value="<? echo htmlspecialchars($extraEmailPrint); ?>">
             </div>
             <div class="form__field">
                     <input type="submit" value="confirm bio & email" class="btn btn--primary">
             </div>
+            <?php if(isset($error)): ?>
+                <div class="error"><?php echo $error; ?></div>
+            <?php endif; ?>
         </form>
         <a href="profile.php . $result['id']"></a>
-
-        <div>
-            <?php if(isset($error)): ?>
-                <div><?php echo $error ?></div>
-            <?php endif; ?>
-        </div>
+        <?php
+                if(isset($_POST['delete'])):
+                    //var_dump($_SESSION['id']);
+                    $user->deleteUser($id);
+                    header("location: register.php")
+                    ?>
+        <?php endif; ?>
+        <form action="" method="post">
+                <input type="submit" value="delete this user" name="delete" id="delete">
+        </form>
+        <?php foreach($allPosts as $p):?>
+                        <img src="uploads/<?php echo ($p['imagePath'])?>" alt="img">
+                        <p><?php echo htmlspecialchars($p['description'])?></p>
+        <?php endforeach; ?> 
     </div>
 </body>

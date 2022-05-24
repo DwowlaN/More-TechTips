@@ -1,13 +1,14 @@
 <?php
 include_once(__DIR__."/classes/User.php");
 include_once(__DIR__."/classes/Comment.php");
-$allComments = Comment::getAllComments(3);
+
 
 
     session_start();
     if(isset($_SESSION)){
         try{
             echo "Welcome " . $_SESSION['username'];
+            $allComments = Comment::getAllComments(3);
             //alle users loopen
             //users uit getAll() functie
         }
@@ -37,10 +38,11 @@ $allComments = Comment::getAllComments(3);
    <div>
        <nav>
             <p class="search">search</p>
-            <a class= "http://localhost/php/more-techtips/index.php" href="">Home</a>
+            <a href="http://localhost/php/more-techtips/index.php">Home</a>
             <a href="http://localhost/php/more-techtips/profile.php">My profile</a>
             <a href="http://localhost/php/more-techtips/upload.php">Upload</a>
             <a class= "reset" href="resetPW.mail.php">Reset Password</a>
+            <a href="http://localhost/php/more-techtips/logout.php">Log out</a>
        </nav>
        <div>
            <div>
@@ -55,15 +57,13 @@ $allComments = Comment::getAllComments(3);
                 </div>
                 <ul class="post__comments__list">
                     <?php foreach($allComments as $c):?>
-                        <li><?php echo $c['text']; ?></li>
+                        <li><?php echo htmlspecialchars($c['text']); ?></li>
                     <?php endforeach; ?> 
                 </ul>
 
-           <?php foreach($users as $user): ?>
-                <h2><?php echo $user['username']; ?></h2>
-            <?php endforeach; ?>
+                <h2><?php echo htmlspecialchars($user['username']); ?></h2>
+      
            </div>
-       <a href="http://localhost/php/more-techtips/logout.php">Log out</a>
        <script src="app.js"></script>
     </div>
    </div>

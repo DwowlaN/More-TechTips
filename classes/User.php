@@ -1,7 +1,4 @@
 <?php
-//nieuwe klasse getters en setters deftig implementeren, mis het nut van in getters/setters zo de extra beveiliging toe te voegen (bij bio bv)
-//ajax volledig van niks opbouwen en toepassen
-// in bio bijvoorbeeld XSS verdegiging doen
 
 include_once(__DIR__ . "/Db.php");
 
@@ -53,6 +50,9 @@ class User{
      */ 
     public function setBio($bio)
     {
+        if(empty($bio)){
+            throw new Exception("bio can't be empty");
+        }
         $this->bio = $bio;
 
         return $this;
@@ -75,7 +75,7 @@ public function setEmail($email)
     if(empty($email)){
         throw new Exception("e-mail can't be empty");
     }
-$this->email = $email;
+    $this->email = $email;
 
 return $this;
 }
@@ -98,7 +98,7 @@ public function setPassword($password)
     if(strlen($password) < 6){
         throw new Exception("Passwords must be longer than 6 characters.");
     }
-$this->password = $password;
+    $this->password = $password;
 
 return $this;
 }
@@ -141,7 +141,7 @@ public function setUsername($username)
     if(empty($username)){
         throw new Exception("username can't be empty");
     }
-$this->username = $username;
+    $this->username = $username;
 
 return $this;
 }
@@ -217,7 +217,7 @@ public function canLogin(){
 
     $conn = Db::getConnection();
     $query = $conn->prepare("select * from users where (username) = (:username)");
-    //sessionstart doen, checken of ik cookie kan zien?, session id/username
+
     $username = $this->getUsername();
     $query->bindValue(":username", $username);
 
@@ -226,13 +226,12 @@ public function canLogin(){
 
     $password = $this->getPassword();
     $hash = $result['password'];
-    //schrijf query om ID op te halen en die in sessie mee te geven
 
 
     if(password_verify($password, $hash)){
         return true;
     }else{
-        throw new Exception("password is not correct!");
+        throw new Exception("please fill in the correct username and password");
         return false;
     }
 }
@@ -258,19 +257,10 @@ public function addBio(){
     if($result){
         return $result;
     }else{
-        throw new Exception("couldn't add email");
+        throw new Exception("couldn't add bio");
     }
 }
-/*public function printBio(){
-    session_start();
-    $conn = Db::getConnection();
-    $query = $conn->prepare("select bio from users WHERE (id) = (:id)");
-    $query->bindValue(":id", $_SESSION['id']);
-    $query->execute();
-    $result = $query->fetch();
-    return $result;
-    var_dump($result);
-}*/
+
 public function extraEmail(){
     session_start();
     $conn = Db::getConnection();
@@ -285,20 +275,25 @@ public function extraEmail(){
         throw new Exception("couldn't add email");
     }
 }
-/*public function deleteUser(){
+
+public function deleteUser(){
     session_start();
     $conn = Db::getConnection();
     $query = $conn->prepare("delete from users where id = (:id)");
-    //query zelfde maar dan posts, comments etc, met user_id query1,2 etc
+    $query1 = $conn->prepare("delete from comments where user_id = (:id)");
+    $query2 = $conn->prepare("delete from posts where user_id = (:id)");
+
+
     $query->bindValue(":id", $_SESSION['id']);
+    $query1->bindValue(":id",$_SESSION['id']);
+    $query2->bindValue(":id",$_SESSION['id']);
+
     $result = $query->execute();
-    if($result){
-        return $result;
-        header("location:register.php");
-    }else{
-        throw new Exception("couldn't delete user");
-    }
-}*/
+    $result1 = $query1->execute();
+    $result2 = $query2->execute();
+
+    return $result.$result1.$result2;
+}
 
 
 }
