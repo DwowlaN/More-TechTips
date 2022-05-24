@@ -43,7 +43,6 @@ include_once(__DIR__."/classes/Comment.php");
             <a href="index.php">Home</a>
             <a href="profile.php">My profile</a>
             <a href="upload.php">Upload</a>
-            <a class= "reset" href="resetPW.mail.php">Reset Password</a>
             <a href="logout.php">Log out</a>
        </nav>
        <div>

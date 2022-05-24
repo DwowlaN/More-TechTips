@@ -59,6 +59,11 @@ if (!empty($_POST)) {
         <a href="register.php">
       <input type="submit" value="Create new account"/>
     </a>
+    <p>Forgot your password?</p>
+    <a href="resetPW.mail.php">
+    <input type="submit" value="reset password"/>
+
+    </a>
     </div>
 </body>
 
