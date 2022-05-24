@@ -1,4 +1,4 @@
-.nav {
+nav {
     display: flex;
 }
 .flex-search {
@@ -6,15 +6,38 @@
     align-items: center;
     justify-content: center;
 }
+.user {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+}
 .search {
     background-color: #dff7f1;
     border-radius: 25px;
     margin: 15px;
     padding: 15px;
     color: black;
-    max-width: 350px;
-    align-items: center;
-    justify-content: center;
+    min-width: 350px;
+
     
 }
-
+.profile {
+    display: flex;
+    background-color: #dff7f1;
+    border-radius: 25px;
+    margin: 15px;
+    padding: 15px;
+    color: black;
+    max-width: 80px;
+}
+.logout {
+    display: flex;
+    background-color: #dff7f1;
+    border-radius: 25px;
+    margin: 15px;
+    padding: 15px;
+    color: black;
+    max-width: 60px;
+    align-items: right;
+    justify-items: right;
+}
