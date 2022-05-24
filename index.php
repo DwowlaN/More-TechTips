@@ -5,7 +5,7 @@ include_once(__DIR__."/classes/Comment.php");
 
 
     session_start();
-    if(isset($_SESSION)){
+    if(isset($_SESSION['id'])){
         try{
             echo "Welcome " . $_SESSION['username'];
             $allComments = Comment::getAllComments(3);
@@ -38,11 +38,11 @@ include_once(__DIR__."/classes/Comment.php");
    <div>
        <nav>
             <p class="search">search</p>
-            <a href="http://localhost/php/more-techtips/index.php">Home</a>
-            <a href="http://localhost/php/more-techtips/profile.php">My profile</a>
-            <a href="http://localhost/php/more-techtips/upload.php">Upload</a>
+            <a href="index.php">Home</a>
+            <a href="profile.php">My profile</a>
+            <a href="upload.php">Upload</a>
             <a class= "reset" href="resetPW.mail.php">Reset Password</a>
-            <a href="http://localhost/php/more-techtips/logout.php">Log out</a>
+            <a href="logout.php">Log out</a>
        </nav>
        <div>
            <div>

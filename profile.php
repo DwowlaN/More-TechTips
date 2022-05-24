@@ -38,9 +38,9 @@ try {
 </head>
 <body>
 <body>
-<a href="http://localhost/php/more-techtips/index.php">Home</a>
-<a href="http://localhost/php/more-techtips/upload.php">Upload</a>
-<a href="http://localhost/php/more-techtips/logout.php">Log out</a>
+<a href="index.php">Home</a>
+<a href="upload.php">Upload</a>
+<a href="logout.php">Log out</a>
 
     <div>
         <img src="https://memegenerator.net/img/instances/52441577.jpg" alt="profile pic here">
