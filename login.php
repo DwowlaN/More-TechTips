@@ -56,7 +56,7 @@ if (!empty($_POST)) {
     </div>
     <div>
         <p>new here?</p>
-        <a href="http://localhost/php/more-techtips/register.php">
+        <a href="register.php">
       <input type="submit" value="Create new account"/>
     </a>
     </div>

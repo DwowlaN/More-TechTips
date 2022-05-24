@@ -59,7 +59,7 @@ if (!empty($_POST)) {
     </div>
     <div>
         <p>Already have an account?</p>
-        <a href="http://localhost/php/more-techtips/login.php">
+        <a href="login.php">
       <input type="submit" value="log in"/>
     </a>
     </div>
