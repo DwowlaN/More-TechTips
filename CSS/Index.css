@@ -1,15 +1,12 @@
 nav {
     display: flex;
+    align-items: center;
 }
 .flex-search {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.user {
-    display: flex;
-    align-items: right;
-    justify-content: right;
+    justify-items: center;
 }
 .search {
     background-color: #dff7f1;
@@ -18,8 +15,13 @@ nav {
     padding: 15px;
     color: black;
     min-width: 350px;
-
-    
+    align-items: center;
+    justify-content:center ;
+}
+.user {
+    display: flex;
+    align-items: right;
+    justify-items: right;
 }
 .profile {
     display: flex;
@@ -38,6 +40,4 @@ nav {
     padding: 15px;
     color: black;
     max-width: 60px;
-    align-items: right;
-    justify-items: right;
 }

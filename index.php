@@ -34,16 +34,19 @@ include_once(__DIR__."/classes/Comment.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoreTechTips</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
    <div>
        <nav>
-            <a href="index.php">Home</a>
+           <div class="home">
+                <a href="index.php">Home</a>
+           </div>
             <div class="flex-search">
                 <p class="search">search</p>
             </div>
-            <a href="upload.php">Upload</a>
+            <div class="upload">
+                <a href="upload.php">Upload</a>
+            </div>
             <div class="user">
                 <a href="profile.php" class="profile">My profile</a>
                 <a href="logout.php" class="logout">Log out</a>

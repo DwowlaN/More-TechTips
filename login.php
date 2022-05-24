@@ -1,3 +1,4 @@
+
 <?php
 
 
@@ -29,7 +30,7 @@ if (!empty($_POST)) {
 <head>
     <meta charset="UTF-8">
     <title>moretechtips</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
@@ -54,7 +55,7 @@ if (!empty($_POST)) {
             </form>
         </div>
     </div>
-    <div>
+    <div class="register">
         <p>new here?</p>
         <a href="register.php">
       <input type="submit" value="Create new account"/>
