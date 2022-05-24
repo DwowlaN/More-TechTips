@@ -37,10 +37,10 @@ include_once(__DIR__."/classes/Comment.php");
 <body>
    <div>
        <nav>
-            <p class="search">search</p>
             <a href="index.php">Home</a>
-            <a href="profile.php">My profile</a>
+            <p class="search">search</p>
             <a href="upload.php">Upload</a>
+            <a href="profile.php">My profile</a>
             <a class= "reset" href="resetPW.mail.php">Reset Password</a>
             <a href="logout.php">Log out</a>
        </nav>
