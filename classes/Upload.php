@@ -47,10 +47,13 @@ class Upload{
     public function projectImgCheck($image)
     {
         session_start();
-        $id = $_SESSION['id'];
+        
         $targetDir = (__DIR__ . "./../uploads/");
-        $fileName = $id . "_" . basename($image['name']);
+
+        $id = $_SESSION['id'];
+        $fileName = $id . basename($image['name']);
         $targetPath = $targetDir . $fileName;
+
         $fileType = pathinfo($targetPath,PATHINFO_EXTENSION);
 
         $allowedTypes = array('jpg','png','jpeg','gif','pdf');
@@ -65,8 +68,11 @@ class Upload{
     public function projectImgUpload($image, $desc)
     {
         session_start();
-        $id = $_SESSION['id'];
+        
         $targetDir = (__DIR__ . "./../uploads/");
+
+        $id = $_SESSION['id'];
+
         $fileName = $id . basename($image['name']);
         $targetPath = $targetDir . $fileName;
         

@@ -2,7 +2,6 @@
     include_once(__DIR__ . "/../classes/Comment.php");
 
     if(!empty($_POST)){
-        // nieuwe comment
         $c = new Comment();
         session_start();
         $c->setPostId($_POST['post_id']);
@@ -11,10 +10,9 @@
         //save()
         $c->save();
 
-        //succes boodschap
         $response = [
            'status' => 'success',
-           'body' => htmlspecialchars($c->getText()), //specialchars om scripts te injecteren
+           'body' => $c->getText(),
            'message' => 'comment saved'
         ];
 
