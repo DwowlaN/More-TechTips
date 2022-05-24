@@ -9,6 +9,7 @@ include_once(__DIR__."/classes/Comment.php");
         try{
             echo "Welcome " . $_SESSION['username'];
             $allComments = Comment::getAllComments(3);
+
             //alle users loopen
             //users uit getAll() functie
         }
@@ -18,6 +19,7 @@ include_once(__DIR__."/classes/Comment.php");
     else {
         header ("location:login.php");
     }
+    $username = $_SESSION['username'];            
 
     //if statements rond bv veldje description vna projecten
     //feature 11 zoals yt videos, id mee geven in route (get)
@@ -61,7 +63,7 @@ include_once(__DIR__."/classes/Comment.php");
                     <?php endforeach; ?> 
                 </ul>
 
-                <h2><?php echo htmlspecialchars($user['username']); ?></h2>
+                <h2><?php echo htmlspecialchars($username); ?></h2>
       
            </div>
        <script src="app.js"></script>
