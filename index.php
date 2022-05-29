@@ -64,8 +64,6 @@ include_once(__DIR__."/classes/Comment.php");
                         <li class="list-group-item"><?php echo htmlspecialchars($c['text']); ?></li>
                     <?php endforeach; ?> 
                 </ul>
-
-                <h2><?php echo htmlspecialchars($username); ?></h2>
       
            </div>
        <script src="app.js"></script>
