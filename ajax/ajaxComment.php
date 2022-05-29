@@ -6,8 +6,8 @@
         session_start();
         $c->setPostId($_POST['post_id']);
         $c->setText($_POST['text']);
-        $c->setUserId($_SESSION['id']);//uit session id halen!! zodat hackers er niet aankunnen, daarom niet uit post
-        //save()
+        $c->setUserId($_SESSION['id']);
+
         $c->save();
 
         $response = [
@@ -17,5 +17,5 @@
         ];
 
         header('Content-Type: application/json');
-        echo json_encode($response); // dit maakt {'status': 'success', body, message etc}
+        echo json_encode($response);
     }

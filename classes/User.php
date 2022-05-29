@@ -166,11 +166,12 @@ return $this;
 
         return $this;
     }
-    public function getSessionId($username)
+
+    public function getSessionId($email)
     {   session_start();
         $conn = Db::getConnection();
-        $query = $conn->prepare("select id from users where (username) = (:username)");
-        $query->bindValue(":username", $username);
+        $query = $conn->prepare("select id from users where (email) = (:email) or extraEmail = (:email)");
+        $query->bindValue(":email", $email);
         $query->execute();
         $result = $query->fetch();
         return $result['id'];
@@ -216,10 +217,10 @@ public function checkEmail($email){
 public function canLogin(){
 
     $conn = Db::getConnection();
-    $query = $conn->prepare("select * from users where (username) = (:username)");
+    $query = $conn->prepare("select * from users where email = (:email) or extraEmail = (:email)");
 
-    $username = $this->getUsername();
-    $query->bindValue(":username", $username);
+    $email = $this->getEmail();
+    $query->bindValue(":email", $email);
 
     $query->execute();
     $result = $query->fetch();
@@ -243,7 +244,6 @@ public function getAll()
     $query->execute();
     $result = $query->fetch();
     return $result;
-    var_dump($result);
 }
 
 public function addBio(){   
@@ -293,6 +293,17 @@ public function deleteUser(){
     $result2 = $query2->execute();
 
     return $result.$result1.$result2;
+}
+
+public function getUserData()
+{
+    session_start();
+    $conn = Db::getConnection();
+    $query = $conn->prepare("select * from users where id = (:id)");
+    $query->bindValue(":id", $_SESSION['id']);
+    $query->execute();
+    $result = $query->fetch();
+    return $result;
 }
 
 
