@@ -1,12 +1,11 @@
-document.querySelector("#btnAddComment").addEventListener("click", function () {
-    //postId?
-    //comment text?
+document.querySelector("#btnAddComment").addEventListener("click", function (event) {
+
     let postId = this.dataset.postid;
     let text = document.querySelector("#commentText").value;
     console.log(postId);
     console.log(text);
+    event.preventDefault();
 
-    //naar databank posten (ajax)
     let formData = new FormData();
     formData.append('text', text);
     formData.append('post_id', postId);
@@ -22,10 +21,10 @@ document.querySelector("#btnAddComment").addEventListener("click", function () {
             newComment.innerHTML = result.body;
             document.querySelector(".post__comments__list").appendChild(newComment);
             document.querySelector("#commentText").value = "";
+
         })
         .catch(error => {
             console.error('Error:', error);
         });
 
-    //antwoord weten gelukt -> comment onderaan tonen
 });

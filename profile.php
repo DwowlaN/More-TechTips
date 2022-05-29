@@ -6,7 +6,8 @@ include_once(__DIR__."/classes/Post.php");
 session_start();
 if(isset($_SESSION['id'])){
     $allPosts = Post::getUserPosts($_SESSION['id']);
-
+    $user = new User();
+    $userData = $user->getUserData();
 } else {
     header ("location:login.php");
 }
@@ -18,8 +19,8 @@ try {
     $user->addBio();
     $user->setExtraEmail($_POST["extraEmail"]);
     $user->extraEmail();
-    $bioPrint= $user->getBio();
-    $extraEmailPrint = $user->getExtraEmail();
+    $userData['bio'] = $user->getBio();
+    $userData['extraEmail'] = $user->getExtraEmail();
     
 }
 }catch(\Throwable $e){
@@ -33,31 +34,35 @@ try {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoreTechTips</title>
-    <link rel="stylesheet" href="style.css">
+    <title>profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-<body>
-<a href="index.php">Home</a>
-<a href="upload.php">Upload</a>
-<a href="logout.php">Log out</a>
-
-    <div>
+    <nav class="navbar-nav">
+           <div class="container-fluid text-bg-light">
+            <a class="nav-link" href="index.php">Home</a>
+            <a class="nav-link" href="profile.php">My profile</a>
+            <a class="nav-link" href="upload.php">Upload</a>
+            <a class= "reset nav-link" href="resetPW.mail.php">Reset Password</a>
+            <a class="nav-link" href="logout.php">Log out</a>
+            </div>
+    </nav>
+    <div class="ms-5 mt-3">
         <img src="https://memegenerator.net/img/instances/52441577.jpg" alt="profile pic here">
         <p>This is your profile page</p>
 
         <form action="" method="post">
-            <div class="form__field">
+            <div class="form__field mt-3">
                     <label for="bio">Bio</label>
-                    <input type="bio" name="bio" value="<? echo htmlspecialchars($bioPrint); ?>">
+                    <input type="text" name="bio" value="<? echo htmlspecialchars($userData['bio']); ?>">
             </div>
         
-            <div class="form__field">
-                    <label for="extraEmail">Add a secondary email</label>
-                    <input type="extraEmail" name="extraEmail" value="<? echo htmlspecialchars($extraEmailPrint); ?>">
+            <div class="form__field mt-3">
+                    <label for="extraEmail">Secondary email</label>
+                    <input type="email" name="extraEmail" value="<? echo htmlspecialchars($userData['extraEmail']); ?>">
             </div>
-            <div class="form__field">
-                    <input type="submit" value="confirm bio & email" class="btn btn--primary">
+            <div class="form__field mt-3">
+                    <input type="submit" value="confirm bio & email" class="btn btn-secondary">
             </div>
             <?php if(isset($error)): ?>
                 <div class="error"><?php echo $error; ?></div>
@@ -72,7 +77,7 @@ try {
                     ?>
         <?php endif; ?>
         <form action="" method="post">
-                <input type="submit" value="delete this user" name="delete" id="delete">
+                <input class="btn btn-danger" type="submit" value="delete this user" name="delete" id="delete">
         </form>
         <?php foreach($allPosts as $p):?>
                         <img src="uploads/<?php echo ($p['imagePath'])?>" alt="img">

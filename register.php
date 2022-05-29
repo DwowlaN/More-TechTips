@@ -12,7 +12,7 @@ if (!empty($_POST)) {
 
         $user->register();
         $_SESSION['username'] = $_POST['username'];
-        $_SESSION['id'] = $user->getSessionId($_SESSION['username']);
+        $_SESSION['id'] = $user->getSessionId($_POST['email']);
         var_dump($_SESSION['id']);
         header("location: index.php");
     }catch(\Throwable $e){
@@ -24,32 +24,33 @@ if (!empty($_POST)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>moretechtips</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="loginDiv">
-        <div class="form form--login">
+    <div class="mb-5 mt-3">
+        <div class="form form--login m-5">
             <form action="" method="post">
-                <h2 form__title>Register</h2>
+                <h2>Register</h2>
                 <div class="form__field">
-                    <label for="psername">Username</label>
-                    <input type="username" name="username">
+                    <label class="form-label" for="psername">Username</label>
+                    <input class="form-control" type="username" name="username">
                 </div>
                 <div class="form__field">
-                    <label for="pmail">Email</label>
-                    <input autocomplete="off" type="text" name="email">
+                    <label class="form-label" for="pmail">Email</label>
+                    <input class="form-control" autocomplete="off" type="text" name="email">
                 </div>
                 <div class="form__field">
-                    <label for="password">Password</label>
-                    <input type="password" name="password">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" type="password" name="password">
                 </div>
-                <div class="form__field">
-                    <input type="submit" value="Sign in" class="btn btn--primary">
+                <div class="form__field mt-3">
+                    <input type="submit" value="Sign in" class="btn btn-success">
                 </div>
             </form>
             <?php if(isset($error)): ?>
@@ -57,10 +58,10 @@ if (!empty($_POST)) {
         <?php endif; ?>
         </div>
     </div>
-    <div>
+    <div class="mx-5">
         <p>Already have an account?</p>
         <a href="login.php">
-      <input type="submit" value="log in"/>
+      <input class="btn btn-primary" type="submit" value="log in"/>
     </a>
     </div>
 </body>
